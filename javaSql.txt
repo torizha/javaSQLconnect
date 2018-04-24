@@ -1,0 +1,29 @@
+package com.salconnect;
+import java.sql.*;
+public class Javaconnection {
+
+	public static void main(String[] args) {
+		String connectionUrl="jdbc:sqlserver://localhost:1433;"+"databaseName=JavaData;integratedSecurity=true;";
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				con=DriverManager.getConnection(connectionUrl, "username", "password");
+				System.out.println("Connection established");
+				
+				String SQL="select * from EmployeeSalary1";
+				stmt=con.createStatement();
+				rs=stmt.executeQuery(SQL);
+				while(rs.next())
+				{
+					System.out.println(rs.getString(3)+" "+rs.getString(4));
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+	}
+
+}
